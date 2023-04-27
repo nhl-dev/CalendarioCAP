@@ -4,6 +4,8 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import { storeData, getData } from './src/helpers/storageHelper';
 
+import Welcome from "./src/screens/Welcome";
+
 const HAS_LAUNCHED = 'HAS_LAUNCHED';
 
 export default function App() {
@@ -26,7 +28,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {hasLaunched ? null : null}
+      {hasLaunched ? <Welcome /> : <Welcome />}
     </View>
   );
 }
