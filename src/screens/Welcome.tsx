@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image, SafeAreaView } from 'react-native'
 import { useState } from 'react';
 
 import SelectBox from 'react-native-multi-selectbox';
 import { xorBy } from 'lodash';
 
 import { storeData } from '../helpers/storageHelper';
+import SafeViewAndroid from "../components/SafeAreaAndroid";
 
 const initialData = {
     'football': false,
@@ -52,29 +53,31 @@ const Welcome = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.secondaryContainer}>
-                <Text style={styles.welcomeText}>Bienvenido a</Text>
-                <Text style={styles.mainText}>Calendario CAP</Text>
-                <Image source={require('../../assets/img/logo.jpg')} style={styles.logo} />
-            </View>
+        <SafeAreaView style={SafeViewAndroid.AndroidSafeArea}>
+            <View style={styles.container}>
+                <View style={styles.secondaryContainer}>
+                    <Text style={styles.welcomeText}>Bienvenido a</Text>
+                    <Text style={styles.mainText}>Calendario CAP</Text>
+                    <Image source={require('../../assets/img/logo.jpg')} style={styles.logo} />
+                </View>
 
-            <Text style={styles.bodyText}>Selecciona los deportes que quieras seguir:</Text>
-            <View style={styles.selectContainer}>
-                <SelectBox
-                    label=""
-                    options={selectOptions}
-                    selectedValues={selectedSports}
-                    onMultiSelect={onMultiChange()}
-                    onTapClose={onMultiChange()}
-                    isMulti
-                />
-            </View>
+                <View style={styles.selectContainer}>
+                    <Text style={styles.bodyText}>Selecciona los deportes que quieras seguir:</Text>
+                    <SelectBox
+                        label=""
+                        options={selectOptions}
+                        selectedValues={selectedSports}
+                        onMultiSelect={onMultiChange()}
+                        onTapClose={onMultiChange()}
+                        isMulti
+                    />
+                </View>
 
-            <TouchableOpacity onPress={() => onSave().catch((e) => { console.log(e) })} style={styles.button}>
-                <Text style={styles.buttonText}>Guardar</Text>
-            </TouchableOpacity>
-        </View>
+                <TouchableOpacity onPress={() => onSave().catch((e) => { console.log(e) })} style={styles.button}>
+                    <Text style={styles.buttonText}>Guardar</Text>
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
     )
 
     function onMultiChange() {
@@ -88,13 +91,15 @@ export default Welcome
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#272727',
+        backgroundColor: '#272624',
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20,
         width: '100%',
     },
     secondaryContainer: {
+        position: 'absolute',
+        top: "0%",
         alignItems: 'center',
         padding: 20,
         width: '100%',
@@ -102,7 +107,8 @@ const styles = StyleSheet.create({
     selectContainer: {
         justifyContent: 'center',
         width: '100%',
-        marginBottom: 100,
+        position: 'absolute',
+        top: "55%",
     },
     welcomeText: {
         color: '#fff',
