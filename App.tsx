@@ -1,10 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StatusBar, StyleSheet } from 'react-native';
 
 import { storeData, getData } from './src/helpers/storageHelper';
 
 import Welcome from "./src/screens/Welcome";
+import BottomTab from './src/navigation/BottomTab';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { DarkTheme } from '@react-navigation/native';
 
 const HAS_LAUNCHED = 'HAS_LAUNCHED';
 
@@ -27,17 +30,19 @@ export default function App() {
   }, []);
 
   return (
-    <View style={styles.container}>
-      {hasLaunched ? <Welcome /> : <Welcome />}
-    </View>
+
+    <NavigationContainer theme={DarkTheme}>
+      <StatusBar
+        backgroundColor={'#000'}
+        barStyle={'light-content'}
+      />
+      {hasLaunched
+        ? <BottomTab />
+        : <Welcome />}
+    </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+
 });
