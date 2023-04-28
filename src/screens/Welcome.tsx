@@ -36,7 +36,11 @@ interface sport {
     id: string,
 }
 
-const Welcome = () => {
+interface Props {
+    hl: any,
+}
+
+const Welcome = ({ hl }: Props) => {
 
     const [selected, setSelected] = useState(initialData);
     const [selectedSports, setSelectedSports] = useState([]);
@@ -50,6 +54,7 @@ const Welcome = () => {
         });
         setSelected(auxSelected);
         await storeData('sports', JSON.stringify(selected));
+        hl(true);
     }
 
     return (

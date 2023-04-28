@@ -38,7 +38,7 @@ export default function App() {
       />
       {hasLaunched
         ? <BottomTab />
-        : <Welcome />}
+        : <Welcome hl={setHasLaunched} />}
     </NavigationContainer>
   );
 }
