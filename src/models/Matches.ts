@@ -1,32 +1,51 @@
-// To parse this data:
-//
-//   import { Convert } from "./file";
-//
-//   const match = Convert.toMatch(json);
-
-export interface FullMatch {
-  [key: string]: Match;
+export interface MatchesData {
+  data: Datum[];
+  meta: Meta;
 }
 
-export interface Match {
-  date: string;
-  field: string;
-  sport: string;
+export interface Datum {
+  id: number;
+  attributes: DatumAttributes;
+}
+
+export interface DatumAttributes {
+  date: Date;
   tickets: string;
   tournament: string;
   versus: string;
-  path: string;
   home: boolean;
-  icon: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date;
+  field: Field;
+  sport: Field;
 }
 
-// Converts JSON strings to/from your types
-export class Convert {
-  public static toMatch(json: string): { [key: string]: Match } {
-    return JSON.parse(json);
-  }
+export interface Field {
+  data: Data;
+}
 
-  public static matchToJson(value: { [key: string]: Match }): string {
-    return JSON.stringify(value);
-  }
+export interface Data {
+  id: number;
+  attributes: DataAttributes;
+}
+
+export interface DataAttributes {
+  name: string;
+  img?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt: Date;
+  icon?: string;
+}
+
+export interface Meta {
+  pagination: Pagination;
+}
+
+export interface Pagination {
+  page: number;
+  pageSize: number;
+  pageCount: number;
+  total: number;
 }

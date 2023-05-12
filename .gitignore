@@ -11,6 +11,7 @@ npm-debug.*
 web-build/
 *.jpg
 *.png
+.env
 
 # macOS
 .DS_Store
