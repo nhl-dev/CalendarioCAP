@@ -12,6 +12,7 @@ web-build/
 *.jpg
 *.png
 .env
+.eslintcache
 
 # macOS
 .DS_Store
